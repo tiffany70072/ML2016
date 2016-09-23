@@ -1,0 +1,2 @@
+./Q1.sh 3 hw0_data.dat
+chmod +x Q2.sh
