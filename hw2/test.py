@@ -2,27 +2,26 @@ from numpy import genfromtxt, array
 from math import *
 from random import random
 import numpy as np
-import pylab as plt
 import sys
 import pickle
 
 class Spam_Classifier(object):
 	def __init__(self):
 		# constant
-		self.num_feature = 57
-		self.exponential_norm = 100 
+		self.C = 30
+		self.slope = 0.28
 
+		self.eta = 10E-7
+		self.iterator = 5
+		self.num_feature = 57;
+		self.exponential_norm = 100; # avoid sigmoid(z) become 1.0
+		self.num_lost_output = 20;
+		
 		# container
 		self.norm = []
 
-		
-	def set_weight(self):
-		modelname = str(sys.argv[1])
-		weight = genfromtxt(modelname, delimiter = '\n')
-		self.w = np.empty((self.num_feature+1, 1), float);
-		#print weight
-		for i in range(self.w.shape[0]): 
-			self.w[i][0] = weight[i]
+		# other
+		self.submit = 1 # 1 for output submit only, 0 for output all
 
 	def normalization(self):
 		self.norm = [1.0, 0.1, 0.028, 0.281, 0.005, 0.158, 0.275, 0.018, 0.13, 0.11, 
@@ -32,16 +31,17 @@ class Spam_Classifier(object):
 		1.0, 0.093, 1.0, 1.0, 0.41, 0.09, 1.0, 1.0, 0.012, 0.11, 
 		0.007, 0.439, 0.052, 0.022, 3.253, 51.6, 325.85]
 
+		self.x = self.x/self.norm
+	
 	def sigmoid(self, num):
 		return 1/(1+np.exp(-num/self.exponential_norm))
 
 	def compute_test_error(self):	
-		filename = str(sys.argv[2])
-		test_data = genfromtxt(filename, delimiter = ',')
-		
 		foutname = str(sys.argv[3])
 		fout = open(foutname, 'w')
 		fout.write("id,label\n")
+		test_data = genfromtxt(sys.argv[2], delimiter = ',')
+		
 		for i in range(len(test_data)):	
 			test_x = [] # change to clear later
 			test_x.append([1])
@@ -62,9 +62,8 @@ class Spam_Classifier(object):
 		fout.close()	
 
 
-#model = Spam_Classifier()
-model = pickle.load(open(sys.argv[1], "rb"))
-#model.normalization()
 
-#model.set_weight()
+model = pickle.load(open(sys.argv[1], "rb"))
 model.compute_test_error()
+
+
