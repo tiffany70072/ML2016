@@ -1,2 +1,2 @@
 #!/bin/bash
-python classifier.py $1 $2
+python auto-encoder.py $1 $2
