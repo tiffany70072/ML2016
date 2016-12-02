@@ -1,0 +1,1 @@
+python word_vector.py $1 $2
