@@ -4,6 +4,6 @@ HW1: Regression Model (predict PM2.5)
 
 HW2: Spam Classifier
 
-HW3: CNN + Autoencoder + Image Classifier + Semisupervised Learning 
+HW3: CNN + Autoencoder + Image Classifier + Semi-supervised Learning 
 
-HW4: Word Embedding + Unsupervised Learning + Dimesionality Reduction
+HW4: Word Embedding + Unsupervised Learning + Dimensionality Reduction
