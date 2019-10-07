@@ -1,4 +1,5 @@
 # ML2016
+My first machine learning course in 2016.
 
 * HW1: Regression Model (PM2.5 prediction)
 * HW2: Spam Classifier
